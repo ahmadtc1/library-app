@@ -17,11 +17,17 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 
-bookRouter.route('/books')
+bookRouter.route('/')
   .get((req, res) => {
-    res.send('hello books');
+    res.render(
+      'books',
+      {
+        nav: [{ link: '/books', title: 'Books' },
+        { link: '/authors', title: 'Authors' }],
+        title: 'Library'
+      });
   });
-  
+
 bookRouter.route('/single')
   .get((req, res) => {
     res.send("Hello single book");
@@ -29,19 +35,19 @@ bookRouter.route('/single')
 
 app.use('/books', bookRouter);
 app.get('/',
- (req, res) => {
-  res.render(
-    'index',
-    {
-      nav:
-        [
-          { link: '/books', title: 'Books' },
-          { link: '/authors', title: 'Authors' }
-        ],
-      title: 'Library',
-    }
-  );
-});
+  (req, res) => {
+    res.render(
+      'index',
+      {
+        nav:
+          [
+            { link: '/books', title: 'Books' },
+            { link: '/authors', title: 'Authors' }
+          ],
+        title: 'Library',
+      }
+    );
+  });
 
 app.listen(port, () => {
   debug(`running on port ${chalk.magenta(port)}`);
