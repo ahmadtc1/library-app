@@ -49,8 +49,9 @@ function router(nav) {
             res.render(
                 'bookListView',
                 {
-                    nav: nav,
-                    books
+                    nav,
+                    books,
+                    title: 'Library'
                 });
         });
 
@@ -60,8 +61,9 @@ function router(nav) {
             res.render(
                 'bookView',
                 {
-                    nav: nav,
-                    book: books[id]
+                    nav,
+                    book: books[id],
+                    title: 'Book ' + id
                 });
         });
     return bookRouter;
