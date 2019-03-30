@@ -5,12 +5,27 @@ const morgan = require('morgan');
 const path = require('path');
 const sql = require('mssql');
 
-const port = process.env.PORT || 3000;
 const app = express();
+const port = process.env.PORT || 3000;
+
+const config = {
+  user: 'library',
+  password: 'Breezy2000',
+  server: 'ahmadlibrary.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
+  database: 'PSLibrary',
+
+  options: {
+      encrypt: true // Use this if you're on Windows Azure
+  }
+};
+
+sql.connect(config).catch((err) => debug(err));
+
 const nav = [
   { link: '/books', title: 'Books' },
   { link: '/authors', title: 'Authors' }
 ];
+
 const bookRouter = require('./src/routes/bookRoutes')(nav);
 
 app.use(morgan('tiny'));
@@ -20,8 +35,10 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist
 app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist')));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
-
 app.use('/books', bookRouter);
+
+
+
 app.get('/',
   (req, res) => {
     res.render(
