@@ -19,6 +19,7 @@ const config = {
   }
 };
 
+//Establish a connection with the sql database
 sql.connect(config).catch((err) => debug(err));
 
 const nav = [
