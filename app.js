@@ -28,7 +28,8 @@ sql.connect(config).catch((err) => debug(err));
 
 const nav = [
   { link: '/books', title: 'Books' },
-  { link: '/authors', title: 'Authors' }
+  { link: '/authors', title: 'Authors' },
+  { link: '/auth/signin', title: 'Logout' }
 ];
 
 const bookRouter = require('./src/routes/bookRoutes')(nav);

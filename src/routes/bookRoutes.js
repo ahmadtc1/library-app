@@ -4,7 +4,7 @@ const { MongoClient, ObjectID } = require('mongodb');
 const debug = require('debug')('app:bookRoutes');
 
 function router(nav) {
-    bookRouter.use*((req, res, next) => {
+    bookRouter.use((req, res, next) => {
         if (req.user) {
             next();
         }
