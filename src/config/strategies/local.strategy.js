@@ -26,18 +26,15 @@ function localStrategy() {
                         else {
                             done(null, false);
                         }
-
                     }
                     catch (err) {
                         console.log(err.stack);
                     }
                     client.close();
                 }());
-
             const user = {
                 username, password
             };
-            done(null, user);
         }
     ));
 
