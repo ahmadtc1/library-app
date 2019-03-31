@@ -37,7 +37,6 @@ function localStrategy() {
             };
         }
     ));
-
 }
 
 module.exports = localStrategy;
