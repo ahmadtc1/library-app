@@ -32,13 +32,40 @@ function bookController(nav) {
 
     }
 
-    function getById() {
-        return
+    function getById(req, res) {
+        const { id } = req.params;
+        const url = 'mongodb://localhost:27017';
+        const dbName = 'libraryApp';
+
+        (async function mongo() {
+            let client;
+            try {
+                client = await MongoClient.connect(url);
+                const db = client.db(dbName);
+                const col = await db.collection('books');
+                const book = await col.findOne({ _id: new ObjectID(id) })
+
+                res.render(
+                    'bookView',
+                    {
+                        nav,
+                        title: 'Library',
+                        book
+                    }
+                );
+            }
+            catch (err) {
+                debug(err.stack);
+            }
+        }())
+
     }
+
     return {
         getIndex,
         getById
     };
 }
+
 
 module.exports = bookController;
