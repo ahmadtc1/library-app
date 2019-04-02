@@ -57,7 +57,7 @@ function bookController(bookService, nav) {
                 );
             }
             catch (err) {
-                debug(err.stack);
+                console.log(err.stack);
             }
         }())
 

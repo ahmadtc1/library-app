@@ -4,9 +4,9 @@ const xml2js = require('xml2js');
 const parser = xml2js.Parser({ explicitArray: false });
 
 function goodReadsService() {
-    function getBookById(id) {
+    function getBookById(bookId) {
         return new Promise((resolve, reject) => {
-            axios.get('https://www.goodreads.com/book/show/656.xml?key=zU3O4cJ1qHe0jzL8Br77w')
+            axios.get(`https://www.goodreads.com/book/show/${bookId}.xml?key=Ivgen3FDP79ytlgxaA35w`)
                 .then((response) => {
                     parser.parseString(response.data, (err, result) => {
                         if (err) {
@@ -22,7 +22,6 @@ function goodReadsService() {
                     reject(error);
                     console.log(error);
                 })
-            resolve({ description: 'Our Description' });
         });
     }
 
