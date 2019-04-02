@@ -1,6 +1,6 @@
 const { MongoClient, ObjectID } = require('mongodb');
 
-function bookController(nav) {
+function bookController(bookService, nav) {
     function getIndex(req, res) {
         const url = 'mongodb://localhost:27017';
         const dbName = 'libraryApp';
@@ -10,7 +10,7 @@ function bookController(nav) {
 
             try {
                 client = await MongoClient.connect(url);
-                debug('Correctly connected to server');
+                console.log('Correctly connected to server');
 
                 const db = client.db(dbName);
                 const col = await db.collection('books');
@@ -25,7 +25,7 @@ function bookController(nav) {
                 );
             }
             catch (err) {
-                debug(err.stack);
+                console.log(err.stack);
             }
             client.close();
         }());
@@ -45,6 +45,8 @@ function bookController(nav) {
                 const col = await db.collection('books');
                 const book = await col.findOne({ _id: new ObjectID(id) })
 
+
+                book.details = await bookService.getBookById(book.bookId);
                 res.render(
                     'bookView',
                     {
@@ -62,12 +64,12 @@ function bookController(nav) {
     }
 
     function middleware(req, res, next) {
-        //if (req.user) {
+        if (req.user) {
             next();
-        //}
-        //else {
-        //    res.redirect('/auth/signin');
-        //}
+        }
+        else {
+            res.redirect('/auth/signin');
+        }
     }
 
     return {
