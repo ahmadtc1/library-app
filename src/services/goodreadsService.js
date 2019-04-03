@@ -24,7 +24,6 @@ function goodReadsService() {
                 })
         });
     }
-
     return { getBookById };
 }
 

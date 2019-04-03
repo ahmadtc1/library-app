@@ -31,7 +31,6 @@ function bookController(bookService, nav) {
         }());
 
     }
-
     function getById(req, res) {
         const { id } = req.params;
         const url = 'mongodb://localhost:27017';
@@ -62,7 +61,6 @@ function bookController(bookService, nav) {
         }())
 
     }
-
     function middleware(req, res, next) {
         if (req.user) {
             next();
@@ -71,7 +69,6 @@ function bookController(bookService, nav) {
             res.redirect('/auth/signin');
         }
     }
-
     return {
         getIndex,
         getById,
