@@ -16,3 +16,6 @@ The database used in this web application is MongoDB, as it allows for scaling a
 
 ### API
 The [Goodreads API](https://www.goodreads.com/api) was used to obtain information about each book in the library
+
+### Users
+User authentication was implemented in the application using [passport](http://www.passportjs.org), limiting library viewing access to registered users only
